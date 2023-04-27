@@ -47,6 +47,25 @@ def div_nums():
 	b = int(request.args["b"])
 	ans = div(a, b)
 	return f"{a} / {b} = {ans}"
+
+@app.route('/math/<operation>')
+def calc_nums(operation):
+	"""Perform operation based on operator and two numbers when typed in URL
+	>>> localhost:5000/mult?a=7&b=9
+	7 * 9 = 63
+	"""
+	operators = {
+		"add": add,
+		"sub": sub,
+		"mult": mult,
+		"div": div
+	}
+
+	a = int(request.args["a"])
+	b = int(request.args["b"])
+	ans = operators[operation](a, b)
+
+	return f"{a} {operation} {b} = {ans}"
 	
 
 
